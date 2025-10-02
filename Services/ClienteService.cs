@@ -45,7 +45,7 @@ public class ClienteService : IClienteInterface
                 Endereco = clienteCriacaoDto.Endereco
             };
 
-            await _context.AddAsync(cliente);
+            _context.Add(cliente);
             await _context.SaveChangesAsync();
 
             resposta.Dados = await _context.Clientes.ToListAsync();

@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations;
 public class ClienteCriacaoDto
 {
 
-public int Id { get; set; }
     public string Nome { get; set; }
 
     [Required(ErrorMessage = "O campo de Email é obrigatório")]
@@ -13,6 +12,7 @@ public int Id { get; set; }
     public DateTime DataNascimento { get; set; }
 
     [Required(ErrorMessage = "O campo de Cpf é obrigatório")]
+    
     public double Cpf { get; set; }
     
     public string Endereco { get; set; }
