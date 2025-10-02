@@ -2,6 +2,8 @@ using System.ComponentModel.DataAnnotations;
 
 public class ClienteCriacaoDto
 {
+
+public int Id { get; set; }
     public string Nome { get; set; }
 
     [Required(ErrorMessage = "O campo de Email é obrigatório")]

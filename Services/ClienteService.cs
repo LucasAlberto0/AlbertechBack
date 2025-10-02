@@ -19,6 +19,7 @@ public class ClienteService : IClienteInterface
 
             resposta.Dados = clientes;
             resposta.Mensagem = "Todos os clientes foram Listados!";
+            resposta.Status = true;
 
             return resposta;
         }
@@ -40,15 +41,16 @@ public class ClienteService : IClienteInterface
                 Nome = clienteCriacaoDto.Nome,
                 Email = clienteCriacaoDto.Email,
                 DataNascimento = clienteCriacaoDto.DataNascimento,
-                Cpf = clienteCriacaoDto.Cpf
-
+                Cpf = clienteCriacaoDto.Cpf,
+                Endereco = clienteCriacaoDto.Endereco
             };
 
-            _context.Add(cliente);
+            await _context.AddAsync(cliente);
             await _context.SaveChangesAsync();
 
             resposta.Dados = await _context.Clientes.ToListAsync();
             resposta.Mensagem = "Cliente criado com sucesso!";
+            resposta.Status = true;
 
             return resposta;
         }
@@ -79,10 +81,11 @@ public class ClienteService : IClienteInterface
             cliente.Endereco = clienteEdicaoDto.Endereco;
 
             _context.Update(cliente);
-            await _context.SaveChangesAsync();
+            await _context.AddAsync(cliente);
 
             resposta.Dados = await _context.Clientes.ToListAsync();
             resposta.Mensagem = "Cliente editado com sucesso!";
+            resposta.Status = true;
 
             return resposta;
         }
