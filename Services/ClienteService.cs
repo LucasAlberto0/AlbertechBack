@@ -9,7 +9,6 @@ public class ClienteService : IClienteInterface
         _context = context;
     }
 
-
     public async Task<ResponseModel<List<ClienteModel>>> ListarClientes()
     {
         ResponseModel<List<ClienteModel>> resposta = new ResponseModel<List<ClienteModel>>();
@@ -125,6 +124,5 @@ public class ClienteService : IClienteInterface
             return resposta;
         }
     }
-
 }
 

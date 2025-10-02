@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-public class ClienteModel
+public class GerenteModel 
 {
     public int Id { get; set; }
     public string Nome { get; set; }
@@ -8,5 +8,5 @@ public class ClienteModel
     public DateTime DataNascimento { get; set; }
     public double Cpf { get; set; }
     public string Endereco { get; set; }
-    public string Empresa { get; set; }
+    public int Empresa { get; set; }
 }
