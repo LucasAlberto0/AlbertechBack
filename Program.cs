@@ -1,5 +1,7 @@
 var builder = WebApplication.CreateBuilder(args);
 
+// builder.Services.AddScoped<IClienteInterface, ClienteService>();
+
 // Add services to the container.
 
 builder.Services.AddControllers();

@@ -1,13 +1,8 @@
 public interface IClienteInterface
 {
+    Task<ResponseModel<List<ClienteModel>>> ListarClientes();
     Task<ResponseModel<List<ClienteModel>>> CriarCliente(ClienteCriacaoDto clienteCriacaoDto);
-    Task<ResponseModel<List<ClienteModel>>> EditarCliente(ClienteCriacaoDto clienteCriacaoDto);
-    Task<ResponseModel<List<ClienteModel>>> DeletarCliente(ClienteCriacaoDto clienteCriacaoDto);
+    Task<ResponseModel<List<ClienteModel>>> EditarCliente(ClienteEdicaoDto clienteEdicaoDto);
+    Task<ResponseModel<List<ClienteModel>>> DeletarCliente(int idCliente);
 }
 
-public class ResponseModel<T>
-{
-    public T? Dados { get; set; }
-    public string Mensagem { get; set; } = string.Empty;
-    public bool Status { get; set; }
-}
