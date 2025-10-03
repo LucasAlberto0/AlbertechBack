@@ -17,19 +17,22 @@ public class GerenteService
     }
 
     public async Task<string> Login(LoginGerenteDto dto)
+{
+    var user = await _userManager.FindByEmailAsync(dto.Email);
+    if (user == null)
     {
-        var resultado = await _signInManager.PasswordSignInAsync(dto.Email, dto.Password, false, false);
-
-        if (!resultado.Succeeded)
-        {
-            throw new ApplicationException("Usuário não autenticado!");
-        }
-
-        var email = _signInManager
-        .UserManager
-        .Users
-        .FirstOrDefault(email => email.NormalizedEmail == dto.Email.ToUpper());
-
-        var token = _tokenService.GenerateToken(email);
+        throw new ApplicationException("Usuário não encontrado!");
     }
+
+    var resultado = await _signInManager.CheckPasswordSignInAsync(user, dto.Password, false);
+
+    if (!resultado.Succeeded)
+    {
+        throw new ApplicationException("Usuário não autenticado!");
+    }
+
+    var token = _tokenService.GenerateToken(user);
+    return token;
+}
+
 }

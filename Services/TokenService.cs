@@ -1,4 +1,7 @@
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 public class TokenService
 {
@@ -11,12 +14,24 @@ public class TokenService
 
     public string GenerateToken(GerenteModel gerente)
     {
-        Claim[] claims = new Claim[]{
-            // new Claim("id", gerente.Id),
+        var claims = new[]
+        {
+            new Claim("id", gerente.Id.ToString()), 
             new Claim("nome", gerente.Nome),
             new Claim("email", gerente.Email),
-            new Claim(ClaimTypes.DateOfBirth, gerente.DataNascimento.ToString()),
-            new Claim("loginTimestamp", DateTime.UtcNow.ToString())
+            new Claim(ClaimTypes.DateOfBirth, gerente.DataNascimento.ToString("yyyy-MM-dd")),
+            new Claim("loginTimestamp", DateTime.UtcNow.ToString("o"))
         };
+
+        var chave = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("5424h32ljh23lk4j234234324"));
+        var signingCredentials = new SigningCredentials(chave, SecurityAlgorithms.HmacSha256);
+
+        var token = new JwtSecurityToken(
+            expires: DateTime.Now.AddMinutes(30),
+            claims: claims,
+            signingCredentials : signingCredentials
+        );
+
+        return new JwtSecurityTokenHandler().WriteToken(token);
     }
 }

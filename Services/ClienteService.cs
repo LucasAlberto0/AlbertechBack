@@ -80,7 +80,8 @@ public class ClienteService : IClienteInterface
             cliente.Endereco = clienteEdicaoDto.Endereco;
 
             _context.Update(cliente);
-            await _context.AddAsync(cliente);
+            await _context.SaveChangesAsync();
+
 
             resposta.Dados = await _context.Clientes.ToListAsync();
             resposta.Mensagem = "Cliente editado com sucesso!";
@@ -90,7 +91,7 @@ public class ClienteService : IClienteInterface
         }
         catch (Exception ex)
         {
-            resposta.Mensagem = ex.Message;
+            resposta.Mensagem = $"{ex.Message} - {ex.InnerException?.Message}";
             resposta.Status = false;
             return resposta;
             }

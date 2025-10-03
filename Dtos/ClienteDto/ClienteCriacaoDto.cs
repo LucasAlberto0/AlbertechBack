@@ -9,11 +9,11 @@ public class ClienteCriacaoDto
     public string Email { get; set; }
 
     [Required(ErrorMessage = "O campo Data de Nascimento é obrigatório")]
-    public DateTime DataNascimento { get; set; }
+    public DateOnly DataNascimento { get; set; }
 
     [Required(ErrorMessage = "O campo de Cpf é obrigatório")]
     
-    public double Cpf { get; set; }
+    public string Cpf { get; set; }
     
     public string Endereco { get; set; }
 }
