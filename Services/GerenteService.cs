@@ -16,23 +16,36 @@ public class GerenteService
         _mapper = mapper;
     }
 
-    public async Task<string> Login(LoginGerenteDto dto)
-{
-    var user = await _userManager.FindByEmailAsync(dto.Email);
-    if (user == null)
+
+    public async Task CadastroGerente(CadastroGerenteDto dto)
     {
-        throw new ApplicationException("Usuário não encontrado!");
+        GerenteModel gerente = _mapper.Map<GerenteModel>(dto);
+        IdentityResult resultado = await _userManager.CreateAsync(gerente, dto.Password);
+        if (!resultado.Succeeded)
+        {
+            throw new ApplicationException("Falha ao cadastrar gerente!");
+        }
+
+    }
+    public async Task<string> LoginGerente(LoginGerenteDto dto)
+    {
+        var user = await _userManager.FindByEmailAsync(dto.Email);
+        if (user == null)
+        {
+            throw new ApplicationException("Gerente não encontrado!");
+        }
+
+        var resultado = await _signInManager.CheckPasswordSignInAsync(user, dto.Password, false);
+
+        if (!resultado.Succeeded)
+        {
+            throw new ApplicationException("Gerente não autenticado!");
+        }
+
+        var token = _tokenService.GenerateToken(user);
+        return token;
     }
 
-    var resultado = await _signInManager.CheckPasswordSignInAsync(user, dto.Password, false);
 
-    if (!resultado.Succeeded)
-    {
-        throw new ApplicationException("Usuário não autenticado!");
-    }
-
-    var token = _tokenService.GenerateToken(user);
-    return token;
-}
 
 }

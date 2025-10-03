@@ -4,11 +4,26 @@ using Microsoft.AspNetCore.Mvc;
 [ApiController]
 [Route("[Controller]")]
 
-public class AcessoController : ControllerBase
+public class GerenteController : ControllerBase
 {
-    [HttpGet]
-    public IActionResult Get()
+
+    private GerenteService _gerenteService;
+    public GerenteController(GerenteService gerenteService)
     {
-        throw new Exception();
+        _gerenteService = gerenteService;
+    }
+
+    [HttpPost("Cadastro")]
+    public async Task<IActionResult> CadastroGerente(CadastroGerenteDto dto)
+    {
+        await _gerenteService.CadastroGerente(dto);
+        return Ok("Usuário cadastrado!");
+    }
+
+    [HttpPost("Login")]
+    public async Task<IActionResult> LoginGerente(LoginGerenteDto dto)
+    {
+        var token = await _gerenteService.LoginGerente(dto);
+        return Ok($"Login realizado com sucesso! Seu token: {token}");
     }
 }

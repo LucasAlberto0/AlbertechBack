@@ -7,12 +7,12 @@ public class CadastroGerenteDto
     [Required]
     public string Email { get; set; }
     [Required]
-    public DateTime DataNascimento { get; set; }
+    public DateOnly DataNascimento { get; set; }
     [Required]
-    public double Cpf { get; set; }
+    public string Cpf { get; set; }
 
     [Required]
-    public int Empresa { get; set; }
+    public string Empresa { get; set; }
 
     [Required]
     [DataType(DataType.Password)]
