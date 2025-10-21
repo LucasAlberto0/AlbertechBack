@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 public class AcessoController : ControllerBase
 {
     [HttpGet]
+    [Authorize]
     public IActionResult Get()
     {
         return Ok("Acesso permitido!");

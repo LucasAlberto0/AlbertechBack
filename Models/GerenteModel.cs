@@ -1,12 +1,11 @@
 using Microsoft.AspNetCore.Identity;
+using System;
 
-public class GerenteModel 
+public class GerenteModel : IdentityUser
 {
-    public int Id { get; set; }
-    public string Nome { get; set; }
-    public string Email { get; set; }
-    public DateOnly DataNascimento { get; set; }
-    public string Cpf { get; set; }
-    public string Endereco { get; set; }
-    public string Empresa { get; set; }
+    public string Nome { get; set; } = string.Empty;
+    public DateTime DataNascimento { get; set; } 
+    public string Cpf { get; set; } = string.Empty;
+    public string? Endereco { get; set; }        
+    public string? Empresa { get; set; }        
 }

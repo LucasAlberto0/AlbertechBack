@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
 public class ClienteModel
 {
@@ -8,4 +9,8 @@ public class ClienteModel
     public DateOnly DataNascimento { get; set; }
     public string Cpf { get; set; }
     public string Endereco { get; set; }
+    public string GerenteId { get; set; }
+
+    public GerenteModel Gerente { get; set; }
+
 }
