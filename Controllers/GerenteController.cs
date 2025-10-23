@@ -24,6 +24,6 @@ public class GerenteController : ControllerBase
     public async Task<IActionResult> LoginGerente(LoginGerenteDto dto)
     {
         var token = await _gerenteService.LoginGerente(dto);
-        return Ok($"Login realizado com sucesso! Seu token: {token}");
+        return Ok (new {token});
     }
 }

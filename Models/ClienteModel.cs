@@ -10,7 +10,6 @@ public class ClienteModel
     public string Cpf { get; set; }
     public string Endereco { get; set; }
     public string GerenteId { get; set; }
-
     public GerenteModel Gerente { get; set; }
 
 }
