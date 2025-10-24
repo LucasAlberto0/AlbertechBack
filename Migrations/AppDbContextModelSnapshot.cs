@@ -29,18 +29,11 @@ namespace MostenClientes.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Cpf")
+                    b.Property<string>("Cidade")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<DateOnly>("DataNascimento")
-                        .HasColumnType("date");
 
                     b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Endereco")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -49,6 +42,14 @@ namespace MostenClientes.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("RamoDaEmpresa")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Telefone")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -71,13 +72,6 @@ namespace MostenClientes.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("text");
 
-                    b.Property<string>("Cpf")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("DataNascimento")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
@@ -86,9 +80,6 @@ namespace MostenClientes.Migrations
                         .HasColumnType("boolean");
 
                     b.Property<string>("Empresa")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Endereco")
                         .HasColumnType("text");
 
                     b.Property<bool>("LockoutEnabled")

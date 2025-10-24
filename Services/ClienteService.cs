@@ -56,10 +56,10 @@ public class ClienteService : IClienteInterface
             {
                 Nome = clienteCriacaoDto.Nome,
                 Email = clienteCriacaoDto.Email,
-                DataNascimento = clienteCriacaoDto.DataNascimento,
-                Cpf = clienteCriacaoDto.Cpf,
-                Endereco = clienteCriacaoDto.Endereco,
-                GerenteId = gerenteId 
+                RamoDaEmpresa = clienteCriacaoDto.RamoDaEmpresa,
+                Telefone = clienteCriacaoDto.Telefone,
+                Cidade = clienteCriacaoDto.Cidade,
+                GerenteId = gerenteId
             };
 
             _context.Add(cliente);
@@ -102,8 +102,9 @@ public class ClienteService : IClienteInterface
 
             cliente.Nome = clienteEdicaoDto.Nome;
             cliente.Email = clienteEdicaoDto.Email;
-            cliente.Cpf = clienteEdicaoDto.Cpf;
-            cliente.Endereco = clienteEdicaoDto.Endereco;
+            cliente.RamoDaEmpresa = clienteEdicaoDto.RamoDaEmpresa;
+            cliente.Telefone = clienteEdicaoDto.Telefone;
+            cliente.Cidade = clienteEdicaoDto.Cidade;
 
             _context.Update(cliente);
             await _context.SaveChangesAsync();

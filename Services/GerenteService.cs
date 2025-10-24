@@ -46,6 +46,4 @@ public class GerenteService
         return token;
     }
 
-
-
 }

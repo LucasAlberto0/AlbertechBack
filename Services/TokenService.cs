@@ -19,7 +19,6 @@ public class TokenService
             new Claim(ClaimTypes.NameIdentifier, gerente.Id.ToString()), 
             new Claim(ClaimTypes.Name, gerente.Nome),
             new Claim(ClaimTypes.Email, gerente.Email),
-            new Claim(ClaimTypes.DateOfBirth, gerente.DataNascimento.ToString("yyyy-MM-dd")),
             new Claim("loginTimestamp", DateTime.UtcNow.ToString("o"))
         };
 

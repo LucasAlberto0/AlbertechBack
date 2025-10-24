@@ -17,7 +17,7 @@ public class GerenteController : ControllerBase
     public async Task<IActionResult> CadastroGerente(CadastroGerenteDto dto)
     {
         await _gerenteService.CadastroGerente(dto);
-        return Ok("Usuário cadastrado!");
+        return Ok();
     }
 
     [HttpPost("Login")]
