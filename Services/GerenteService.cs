@@ -1,21 +1,34 @@
+using System.Security.Claims;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 public class GerenteService
 {
-    private IMapper _mapper;
-    private UserManager<GerenteModel> _userManager;
-    private SignInManager<GerenteModel> _signInManager;
-    private TokenService _tokenService;
+    private readonly IMapper _mapper;
+    private readonly UserManager<GerenteModel> _userManager;
+    private readonly SignInManager<GerenteModel> _signInManager;
+    private readonly TokenService _tokenService;
 
-    public GerenteService(TokenService tokenService, SignInManager<GerenteModel> signInManager, UserManager<GerenteModel> userManager, IMapper mapper)
+    private readonly IHttpContextAccessor _httpContextAccessor;
+
+    private readonly AppDbContext _context;
+
+    public GerenteService(TokenService tokenService, SignInManager<GerenteModel> signInManager, UserManager<GerenteModel> userManager, IMapper mapper, AppDbContext context, IHttpContextAccessor httpContextAccessor)
     {
         _tokenService = tokenService;
         _signInManager = signInManager;
         _userManager = userManager;
         _mapper = mapper;
+        _context = context;
+        _httpContextAccessor = httpContextAccessor;
     }
 
+
+    private string GetGerenteId()
+    {
+        return _httpContextAccessor.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
+    }
 
     public async Task CadastroGerente(CadastroGerenteDto dto)
     {
@@ -46,4 +59,28 @@ public class GerenteService
         return token;
     }
 
+    public async Task<GerenteDashboardDto> ObterDadosGerente()
+    {
+        var gerenteId = GetGerenteId();
+        
+        if (gerenteId == null)
+            throw new Exception("Token inválido ou expirado");
+
+
+
+        var gerente = await _userManager.FindByIdAsync(gerenteId);
+        if (gerente == null)
+            throw new ApplicationException("Gerente não encontrado");
+
+        var totalClientes = await _context.Clientes
+            .CountAsync(c => c.GerenteId == gerenteId);
+
+        return new GerenteDashboardDto
+        {
+            Nome = gerente.Nome,
+            Email = gerente.Email,
+            Empresa = gerente.Empresa,
+            TotalClientes = totalClientes
+        };
+    }
 }

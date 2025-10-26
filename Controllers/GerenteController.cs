@@ -24,6 +24,20 @@ public class GerenteController : ControllerBase
     public async Task<IActionResult> LoginGerente(LoginGerenteDto dto)
     {
         var token = await _gerenteService.LoginGerente(dto);
-        return Ok (new {token});
+        return Ok(new { token });
+    }
+
+    [HttpGet("Dados")]
+    public async Task<IActionResult> ObterDashboard()
+    {
+        try
+        {
+            var dadosGerente = await _gerenteService.ObterDadosGerente();
+            return Ok(dadosGerente);
+        }
+        catch (Exception ex)
+        {
+            return Unauthorized(new { mensagem = ex.Message });
+        }
     }
 }
