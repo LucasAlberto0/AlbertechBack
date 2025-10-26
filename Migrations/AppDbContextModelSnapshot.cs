@@ -45,6 +45,10 @@ namespace MostenClientes.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<string>("NomeDaEmpresa")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("RamoDaEmpresa")
                         .IsRequired()
                         .HasColumnType("text");

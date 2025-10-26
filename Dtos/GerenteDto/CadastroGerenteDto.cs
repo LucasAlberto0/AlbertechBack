@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 public class CadastroGerenteDto
 {
     [DataType(DataType.Text)]
-    [StringLength(30, MinimumLength = 6)]
+    [StringLength(30)]
     [Required()]
     public string Nome { get; set; }
 
@@ -16,11 +16,11 @@ public class CadastroGerenteDto
 
     [StringLength(255, MinimumLength = 8)]
     [Required()]
-    public string Password { get; set; }
+    public string Senha { get; set; }
 
-    [Compare("Password")]
+    [Compare("Senha")]
     [StringLength(255, MinimumLength = 8)]
     [Required()]
-    public string RePassword { get; set; }
+    public string ConfirmarSenha { get; set; }
 
 }

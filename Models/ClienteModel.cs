@@ -7,6 +7,8 @@ public class ClienteModel
 
     public string Nome { get; set; }
 
+    public string NomeDaEmpresa { get; set; }
+
     public string Email { get; set; }
 
     public string RamoDaEmpresa { get; set; }

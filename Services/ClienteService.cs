@@ -55,6 +55,7 @@ public class ClienteService : IClienteInterface
             var cliente = new ClienteModel()
             {
                 Nome = clienteCriacaoDto.Nome,
+                NomeDaEmpresa = clienteCriacaoDto.NomeDaEmpresa,
                 Email = clienteCriacaoDto.Email,
                 RamoDaEmpresa = clienteCriacaoDto.RamoDaEmpresa,
                 Telefone = clienteCriacaoDto.Telefone,
@@ -101,6 +102,7 @@ public class ClienteService : IClienteInterface
             }
 
             cliente.Nome = clienteEdicaoDto.Nome;
+            cliente.NomeDaEmpresa = clienteEdicaoDto.NomeDaEmpresa;
             cliente.Email = clienteEdicaoDto.Email;
             cliente.RamoDaEmpresa = clienteEdicaoDto.RamoDaEmpresa;
             cliente.Telefone = clienteEdicaoDto.Telefone;

@@ -5,6 +5,9 @@ public class ClienteCriacaoDto
     [Required(ErrorMessage = "O campo de Nome é obrigatório")]
     public string Nome { get; set; }
 
+    [Required(ErrorMessage = "O campo de Nome é obrigatório")]
+    public string NomeDaEmpresa { get; set; }
+
     [Required(ErrorMessage = "O campo de Email é obrigatório")]
     public string Email { get; set; }
 

@@ -20,7 +20,7 @@ public class GerenteService
     public async Task CadastroGerente(CadastroGerenteDto dto)
     {
         GerenteModel gerente = _mapper.Map<GerenteModel>(dto);
-        IdentityResult resultado = await _userManager.CreateAsync(gerente, dto.Password);
+        IdentityResult resultado = await _userManager.CreateAsync(gerente, dto.Senha);
         if (!resultado.Succeeded)
         {
             throw new ApplicationException("Falha ao cadastrar gerente!");
@@ -35,7 +35,7 @@ public class GerenteService
             throw new ApplicationException("Gerente não encontrado!");
         }
 
-        var resultado = await _signInManager.CheckPasswordSignInAsync(user, dto.Password, false);
+        var resultado = await _signInManager.CheckPasswordSignInAsync(user, dto.Senha, false);
 
         if (!resultado.Succeeded)
         {

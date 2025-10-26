@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MostenClientes.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251024192408_ConexaoBd")]
+    [Migration("20251026021731_ConexaoBd")]
     partial class ConexaoBd
     {
         /// <inheritdoc />
@@ -45,6 +45,10 @@ namespace MostenClientes.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("NomeDaEmpresa")
                         .IsRequired()
                         .HasColumnType("text");
 
