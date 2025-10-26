@@ -10,22 +10,22 @@ public class GerenteService : IGerenteInterface
     private readonly SignInManager<GerenteModel> _signInManager;
     private readonly TokenService _tokenService;
     private readonly IHttpContextAccessor _httpContextAccessor;
-    private readonly AppDbContext _context;
+    private readonly IGerenteRepository _gerenteRepository;
 
     public GerenteService(
         TokenService tokenService,
         SignInManager<GerenteModel> signInManager,
         UserManager<GerenteModel> userManager,
         IMapper mapper,
-        AppDbContext context,
-        IHttpContextAccessor httpContextAccessor)
+        IHttpContextAccessor httpContextAccessor,
+        IGerenteRepository gerenteRepository)
     {
         _tokenService = tokenService;
         _signInManager = signInManager;
         _userManager = userManager;
         _mapper = mapper;
-        _context = context;
         _httpContextAccessor = httpContextAccessor;
+        _gerenteRepository = gerenteRepository;
     }
 
     private string GetGerenteId()
@@ -51,7 +51,6 @@ public class GerenteService : IGerenteInterface
             resposta.Mensagem = ex.Message;
             resposta.Status = false;
         }
-
         return resposta;
     }
 
@@ -60,7 +59,7 @@ public class GerenteService : IGerenteInterface
         var resposta = new ResponseModel<string>();
         try
         {
-            var user = await _userManager.FindByEmailAsync(dto.Email);
+            var user = await _gerenteRepository.GetByEmailAsync(dto.Email);
             if (user == null)
                 throw new Exception("Gerente não encontrado!");
 
@@ -78,7 +77,6 @@ public class GerenteService : IGerenteInterface
             resposta.Mensagem = ex.Message;
             resposta.Status = false;
         }
-
         return resposta;
     }
 
@@ -91,12 +89,11 @@ public class GerenteService : IGerenteInterface
             if (gerenteId == null)
                 throw new Exception("Token inválido ou expirado");
 
-            var gerente = await _userManager.FindByIdAsync(gerenteId);
+            var gerente = await _gerenteRepository.GetByIdAsync(gerenteId);
             if (gerente == null)
                 throw new Exception("Gerente não encontrado");
 
-            var totalClientes = await _context.Clientes
-                .CountAsync(c => c.GerenteId == gerenteId);
+            var totalClientes = await _gerenteRepository.CountClientesAsync(gerenteId);
 
             var dashboard = new GerenteDashboardDto
             {
@@ -115,7 +112,6 @@ public class GerenteService : IGerenteInterface
             resposta.Mensagem = ex.Message;
             resposta.Status = false;
         }
-
         return resposta;
     }
 }

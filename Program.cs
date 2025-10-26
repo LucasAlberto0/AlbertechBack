@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
+builder.Services.AddScoped<IGerenteRepository, GerenteRepository>();
 builder.Services.AddScoped<IClienteInterface, ClienteService>();
 builder.Services.AddScoped<IGerenteInterface, GerenteService>();
 builder.Services.AddScoped<TokenService>();
