@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MostenClientes.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251026021731_ConexaoBd")]
+    [Migration("20251026032824_ConexaoBd")]
     partial class ConexaoBd
     {
         /// <inheritdoc />

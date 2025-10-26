@@ -10,9 +10,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 
+builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IClienteInterface, ClienteService>();
+builder.Services.AddScoped<IGerenteInterface, GerenteService>();
 builder.Services.AddScoped<TokenService>();
-builder.Services.AddScoped<GerenteService>();
+
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {

@@ -2,42 +2,49 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
-[Route("[Controller]")]
-
+[Route("[controller]")]
 public class GerenteController : ControllerBase
 {
+    private readonly IGerenteInterface _gerenteInterface;
 
-    private GerenteService _gerenteService;
-    public GerenteController(GerenteService gerenteService)
+    public GerenteController(IGerenteInterface gerenteInterface)
     {
-        _gerenteService = gerenteService;
+        _gerenteInterface = gerenteInterface;
     }
 
     [HttpPost("Cadastro")]
-    public async Task<IActionResult> CadastroGerente(CadastroGerenteDto dto)
+    [AllowAnonymous]
+    public async Task<ActionResult<ResponseModel<GerenteModel>>> CadastrarGerente(CadastroGerenteDto dto)
     {
-        await _gerenteService.CadastroGerente(dto);
-        return Ok();
+        var resposta = await _gerenteInterface.CadastroGerente(dto);
+
+        if (!resposta.Status)
+            return BadRequest(resposta);
+
+        return CreatedAtAction(nameof(LoginGerente), resposta);
     }
 
     [HttpPost("Login")]
-    public async Task<IActionResult> LoginGerente(LoginGerenteDto dto)
+    [AllowAnonymous]
+    public async Task<ActionResult<ResponseModel<string>>> LoginGerente(LoginGerenteDto dto)
     {
-        var token = await _gerenteService.LoginGerente(dto);
-        return Ok(new { token });
+        var resposta = await _gerenteInterface.LoginGerente(dto);
+
+        if (!resposta.Status)
+            return Unauthorized(resposta);
+
+        return Ok(resposta);
     }
 
     [HttpGet("Dados")]
-    public async Task<IActionResult> ObterDashboard()
+    [Authorize]
+    public async Task<ActionResult<ResponseModel<GerenteDashboardDto>>> ObterDashboard()
     {
-        try
-        {
-            var dadosGerente = await _gerenteService.ObterDadosGerente();
-            return Ok(dadosGerente);
-        }
-        catch (Exception ex)
-        {
-            return Unauthorized(new { mensagem = ex.Message });
-        }
+        var resposta = await _gerenteInterface.ObterDashboard();
+
+        if (!resposta.Status)
+            return NotFound(resposta);
+
+        return Ok(resposta);
     }
 }

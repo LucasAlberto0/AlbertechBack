@@ -13,32 +13,51 @@ public class ClienteController : ControllerBase
     {
         _clienteInterface = clienteInterface;
     }
-    
+
     [HttpPost("CriarCliente")]
-        public async Task<ActionResult<ResponseModel<ClienteModel>>> CriarClientes(ClienteCriacaoDto clienteCriacaoDto)
-        {
-            var clientes = await _clienteInterface.CriarCliente(clienteCriacaoDto);
-            return Ok(clientes);
-        }
+    public async Task<ActionResult<ResponseModel<ClienteModel>>> CriarClientes(ClienteCriacaoDto clienteCriacaoDto)
+    {
+        var resposta = await _clienteInterface.CriarCliente(clienteCriacaoDto);
+
+        if (!resposta.Status)
+            return BadRequest(resposta);
+
+        return CreatedAtAction(nameof(ListarClientes), resposta);
+    }
+
 
     [HttpGet("ListarClientes")]
     public async Task<ActionResult<ResponseModel<ClienteModel>>> ListarClientes()
     {
-        var clientes = await _clienteInterface.ListarClientes();
-        return Ok(clientes);
+        var resposta = await _clienteInterface.ListarClientes();
+
+        if (!resposta.Status)
+            return NotFound(resposta);
+
+        return Ok(resposta);
     }
 
-    
+
     [HttpPut("EditarCliente")]
-    public async Task<ActionResult<ResponseModel<ClienteModel>>> EditarCliente(ClienteEdicaoDto clienteEdicaoDto){
-        var clientes = await _clienteInterface.EditarCliente(clienteEdicaoDto);
-        return Ok(clientes);
+    public async Task<ActionResult<ResponseModel<ClienteModel>>> EditarCliente(ClienteEdicaoDto clienteEdicaoDto)
+    {
+
+        var resposta = await _clienteInterface.EditarCliente(clienteEdicaoDto);
+
+        if (!resposta.Status)
+            return BadRequest(resposta);
+
+        return Ok(resposta);
     }
 
     [HttpDelete("DeletarCliente")]
     public async Task<ActionResult<ResponseModel<ClienteModel>>> DeletarCliente(int idCliente)
     {
-        var clientes = await _clienteInterface.DeletarCliente(idCliente);
-        return Ok(clientes);
+        var resposta = await _clienteInterface.DeletarCliente(idCliente);
+
+        if (!resposta.Status)
+            return NotFound(resposta);
+        
+        return NoContent();
     }
 }
