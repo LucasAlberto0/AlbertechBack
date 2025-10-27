@@ -1,6 +1,0 @@
-@MostenClientes_HostAddress = http://localhost:5073
-
-GET {{MostenClientes_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

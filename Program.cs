@@ -37,7 +37,7 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.SwaggerDoc("v1", new OpenApiInfo
     {
-        Title = "MostenClientes",
+        Title = "Albertech",
         Version = "v1",
         Description = "API para gerenciamento de clientes e gerentes"
     });
