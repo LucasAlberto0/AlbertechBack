@@ -14,6 +14,13 @@ public class ClienteController : ControllerBase
         _clienteInterface = clienteInterface;
     }
 
+    /// <summary>
+    /// Cria um cliente do gerente
+    /// </summary>
+    /// <returns>IActionResult</returns>
+    /// <response code="401">Caso o token seja inválido</response>
+    /// <response code="400">Caso a criação do cliente não seja realizada com sucesso</response>
+    /// <response code="201">Caso o cliente seja criado com sucesso</response>
     [HttpPost("CriarCliente")]
     public async Task<ActionResult<ResponseModel<ClienteModel>>> CriarClientes(ClienteCriacaoDto clienteCriacaoDto)
     {
@@ -25,7 +32,13 @@ public class ClienteController : ControllerBase
         return CreatedAtAction(nameof(ListarClientes), resposta);
     }
 
-
+    /// <summary>
+    /// Cria uma lista com todos os clientes do gerente
+    /// </summary>
+    /// <returns>IActionResult</returns>
+    /// <response code="401">Caso o token seja inválido</response>
+    /// <response code="404">Caso a lista não retorne nada</response>
+    /// <response code="200">Caso a lista de clientes do gerente seja gerada com sucesso</response>
     [HttpGet("ListarClientes")]
     public async Task<ActionResult<ResponseModel<ClienteModel>>> ListarClientes()
     {
@@ -37,7 +50,13 @@ public class ClienteController : ControllerBase
         return Ok(resposta);
     }
 
-
+    /// <summary>
+    /// Edita um cliente do gerente
+    /// </summary>
+    /// <returns>IActionResult</returns>
+    /// <response code="401">Caso o token seja inválido</response>
+    /// <response code="400">Caso a edição falhar</response>
+    /// <response code="200">Caso a edição seja realizada com sucesso</response>
     [HttpPut("EditarCliente")]
     public async Task<ActionResult<ResponseModel<ClienteModel>>> EditarCliente(ClienteEdicaoDto clienteEdicaoDto)
     {
@@ -50,6 +69,13 @@ public class ClienteController : ControllerBase
         return Ok(resposta);
     }
 
+    /// <summary>
+    /// Deleta um cliente do gerente
+    /// </summary>
+    /// <returns>IActionResult</returns>
+    /// <response code="401">Caso o token seja inválido</response>
+    /// <response code="404">Caso não encontre o cliente do gerente</response>
+    /// <response code="204">Caso o cliente seja deletado com sucesso</response>
     [HttpDelete("DeletarCliente")]
     public async Task<ActionResult<ResponseModel<ClienteModel>>> DeletarCliente(int idCliente)
     {

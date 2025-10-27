@@ -41,6 +41,9 @@ builder.Services.AddSwaggerGen(c =>
         Version = "v1",
         Description = "API para gerenciamento de clientes e gerentes"
     });
+    var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+    c.IncludeXmlComments(xmlPath);
 
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {

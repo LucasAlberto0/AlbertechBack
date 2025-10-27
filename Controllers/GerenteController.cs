@@ -12,6 +12,11 @@ public class GerenteController : ControllerBase
         _gerenteInterface = gerenteInterface;
     }
 
+    /// <summary>
+    /// Cria um gerente
+    /// </summary>
+    /// <returns>IActionResult</returns>
+    /// <response code="201">Caso a criação do gerente seja realizada com sucesso</response>
     [HttpPost("Cadastro")]
     [AllowAnonymous]
     public async Task<ActionResult<ResponseModel<GerenteModel>>> CadastrarGerente(CadastroGerenteDto dto)
@@ -24,6 +29,12 @@ public class GerenteController : ControllerBase
         return CreatedAtAction(nameof(LoginGerente), resposta);
     }
 
+    /// <summary>
+    /// Acesso do gerente gerando o token de acesso
+    /// </summary>
+    /// <returns>IActionResult</returns>
+    /// <response code="401">Caso o acesso do gerente seja negado</response>
+    /// <response code="200">Caso o acesso do gerente seja realizado com sucesso</response>
     [HttpPost("Login")]
     [AllowAnonymous]
     public async Task<ActionResult<ResponseModel<string>>> LoginGerente(LoginGerenteDto dto)
@@ -36,6 +47,13 @@ public class GerenteController : ControllerBase
         return Ok(resposta);
     }
 
+    /// <summary>
+    /// Acessa os dados do gerente e a quantidade de clientes ativos.
+    /// </summary>
+    /// <returns>IActionResult</returns>
+    /// <response code="401">Caso o token seja inválido</response>
+    /// /// <response code="404">Caso o acesso aos dados do gerente retorne nada</response>
+    /// <response code="200">Caso o acesso aos dados do gerente seja realizado com sucesso</response>
     [HttpGet("Dados")]
     [Authorize]
     public async Task<ActionResult<ResponseModel<GerenteDashboardDto>>> ObterDashboard()
