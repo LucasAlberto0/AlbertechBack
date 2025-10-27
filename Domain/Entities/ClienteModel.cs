@@ -17,6 +17,8 @@ public class ClienteModel
 
     public string Cidade { get; set; }
 
+    public string Status { get; set; }
+
     public string GerenteId { get; set; }
 
     public GerenteModel Gerente { get; set; }
