@@ -31,6 +31,6 @@ public class TokenService
             signingCredentials: signingCredentials
         );
 
-        return new JwtSecurityTokenHandler().WriteToken(token);
+        return new JwtSecurityTokenHandler().WriteToken(token); 
     }
 }

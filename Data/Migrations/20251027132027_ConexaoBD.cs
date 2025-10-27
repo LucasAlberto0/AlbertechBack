@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MostenClientes.Migrations
 {
     /// <inheritdoc />
-    public partial class ConexaoBd : Migration
+    public partial class ConexaoBD : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
