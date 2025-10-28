@@ -24,9 +24,22 @@ public class GerenteRepository : IGerenteRepository
         return await _context.Clientes.CountAsync(c => c.GerenteId == gerenteId);
     }
 
+     public async Task<int> CountClientesByStatusAsync(string gerenteId, string status)
+    {
+        return await _context.Clientes
+            .CountAsync(c => c.GerenteId == gerenteId && c.Status.ToLower() == status.ToLower());
+    }
+
+
     public async Task AddAsync(GerenteModel gerente)
     {
         await _context.Users.AddAsync(gerente);
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task UpdateAsync(GerenteModel gerente)
+    {
+        _context.Users.Update(gerente);
         await _context.SaveChangesAsync();
     }
 }

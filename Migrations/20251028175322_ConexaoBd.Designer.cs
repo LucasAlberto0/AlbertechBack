@@ -8,11 +8,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace MostenClientes.Migrations
+namespace AlbertechBack.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251027180552_ConexaoBD")]
-    partial class ConexaoBD
+    [Migration("20251028175322_ConexaoBd")]
+    partial class ConexaoBd
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,6 +53,10 @@ namespace MostenClientes.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("RamoDaEmpresa")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("text");
 

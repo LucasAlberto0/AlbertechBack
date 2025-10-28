@@ -80,7 +80,7 @@ public class GerenteService : IGerenteInterface
         return resposta;
     }
 
-    public async Task<ResponseModel<GerenteDashboardDto>> ObterDashboard()
+    public async Task<ResponseModel<GerenteDashboardDto>> ObterDadosDoGerente()
     {
         var resposta = new ResponseModel<GerenteDashboardDto>();
         try
@@ -94,16 +94,22 @@ public class GerenteService : IGerenteInterface
                 throw new Exception("Gerente não encontrado");
 
             var totalClientes = await _gerenteRepository.CountClientesAsync(gerenteId);
+            var clientesAtivos = await _gerenteRepository.CountClientesByStatusAsync(gerenteId, "Ativo");
+            var clientesEmNegociacao = await _gerenteRepository.CountClientesByStatusAsync(gerenteId, "Em Negociação");
+            var clientesInativos = await _gerenteRepository.CountClientesByStatusAsync(gerenteId, "Inativo");
 
-            var dashboard = new GerenteDashboardDto
+            var dadosDoGerente = new GerenteDashboardDto
             {
                 Nome = gerente.Nome,
                 Email = gerente.Email,
                 Empresa = gerente.Empresa,
-                TotalClientes = totalClientes
+                TotalClientes = totalClientes,
+                ClientesAtivos = clientesAtivos,
+                ClientesEmNegociacao = clientesEmNegociacao,
+                ClientesInativos = clientesInativos
             };
 
-            resposta.Dados = dashboard;
+            resposta.Dados = dadosDoGerente;
             resposta.Mensagem = "Dados do gerente obtidos com sucesso!";
             resposta.Status = true;
         }

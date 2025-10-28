@@ -4,10 +4,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace MostenClientes.Migrations
+namespace AlbertechBack.Migrations
 {
     /// <inheritdoc />
-    public partial class ConexaoBD : Migration
+    public partial class ConexaoBd : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -171,6 +171,7 @@ namespace MostenClientes.Migrations
                     RamoDaEmpresa = table.Column<string>(type: "text", nullable: false),
                     Telefone = table.Column<string>(type: "text", nullable: false),
                     Cidade = table.Column<string>(type: "text", nullable: false),
+                    Status = table.Column<string>(type: "text", nullable: false),
                     GerenteId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>

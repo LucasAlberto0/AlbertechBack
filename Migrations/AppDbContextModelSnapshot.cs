@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
-namespace MostenClientes.Migrations
+namespace AlbertechBack.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     partial class AppDbContextModelSnapshot : ModelSnapshot
@@ -50,6 +50,10 @@ namespace MostenClientes.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("RamoDaEmpresa")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Status")
                         .IsRequired()
                         .HasColumnType("text");
 

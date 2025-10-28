@@ -22,6 +22,6 @@ public class ClienteEdicaoDto
     [StringLength(18, MinimumLength = 2)]
     public string Cidade { get; set; }
 
-    [StringLength(10, MinimumLength = 3)]
+    [StringLength(18, MinimumLength = 3)]
     public string Status { get; set; }
 }

@@ -4,5 +4,5 @@ public interface IGerenteInterface
 
     Task<ResponseModel<string>> LoginGerente(LoginGerenteDto dto);
     
-    Task<ResponseModel<GerenteDashboardDto>> ObterDashboard();
+    Task<ResponseModel<GerenteDashboardDto>> ObterDadosDoGerente();
 }

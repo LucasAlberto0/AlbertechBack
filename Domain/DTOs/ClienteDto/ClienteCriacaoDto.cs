@@ -27,7 +27,7 @@ public class ClienteCriacaoDto
     [Required(ErrorMessage = "O campo de cidade é obrigatório")]
     public string Cidade { get; set; }
 
-    [StringLength(10, MinimumLength = 3)]
+    [StringLength(18, MinimumLength = 3)]
     [Required(ErrorMessage = "O campo de status é obrigatório")]
     public string Status { get; set; }
 }

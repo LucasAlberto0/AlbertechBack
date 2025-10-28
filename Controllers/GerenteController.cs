@@ -56,9 +56,9 @@ public class GerenteController : ControllerBase
     /// <response code="200">Caso o acesso aos dados do gerente seja realizado com sucesso</response>
     [HttpGet("Dados")]
     [Authorize]
-    public async Task<ActionResult<ResponseModel<GerenteDashboardDto>>> ObterDashboard()
+    public async Task<ActionResult<ResponseModel<GerenteDashboardDto>>> ObterDadosDoGerente()
     {
-        var resposta = await _gerenteInterface.ObterDashboard();
+        var resposta = await _gerenteInterface.ObterDadosDoGerente();
 
         if (!resposta.Status)
             return NotFound(resposta);

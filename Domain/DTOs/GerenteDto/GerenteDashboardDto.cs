@@ -7,4 +7,10 @@ public class GerenteDashboardDto
     public string Empresa { get; set; }
 
     public int TotalClientes { get; set; }
+
+    public int ClientesAtivos { get; set; }
+
+    public int ClientesEmNegociacao { get; set; }
+
+    public int ClientesInativos { get; set; }
 }
