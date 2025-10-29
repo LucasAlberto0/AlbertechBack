@@ -24,7 +24,7 @@ public class GerenteRepository : IGerenteRepository
         return await _context.Clientes.CountAsync(c => c.GerenteId == gerenteId);
     }
 
-     public async Task<int> CountClientesByStatusAsync(string gerenteId, string status)
+    public async Task<int> CountClientesByStatusAsync(string gerenteId, string status)
     {
         return await _context.Clientes
             .CountAsync(c => c.GerenteId == gerenteId && c.Status.ToLower() == status.ToLower());

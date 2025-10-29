@@ -80,6 +80,49 @@ public class GerenteService : IGerenteInterface
         return resposta;
     }
 
+public async Task<ResponseModel<GerenteModel>> EditarGerente(GerenteEdicaoDto dto)
+{
+    var resposta = new ResponseModel<GerenteModel>();
+    try
+    {
+        var gerenteId = GetGerenteId();
+        if (gerenteId == null)
+            throw new Exception("Gerente não autenticado");
+
+        var gerente = await _gerenteRepository.GetByIdAsync(gerenteId);
+        if (gerente == null)
+            throw new Exception("Gerente não encontrado");
+
+        gerente.Nome = dto.Nome;
+        gerente.Empresa = dto.Empresa;
+
+        if (!string.IsNullOrWhiteSpace(dto.Email))
+            gerente.Email = dto.Email;
+
+        if (!string.IsNullOrWhiteSpace(dto.SenhaAtual) && !string.IsNullOrWhiteSpace(dto.NovaSenha))
+        {
+            var result = await _userManager.ChangePasswordAsync(gerente, dto.SenhaAtual, dto.NovaSenha);
+            if (!result.Succeeded)
+                throw new Exception("Falha ao alterar a senha. Verifique a senha atual.");
+        }
+
+        await _gerenteRepository.UpdateAsync(gerente);
+
+        resposta.Dados = gerente;
+        resposta.Mensagem = "Dados do gerente atualizados com sucesso!";
+        resposta.Status = true;
+    }
+    catch (Exception ex)
+    {
+        resposta.Mensagem = ex.Message;
+        resposta.Status = false;
+    }
+
+    return resposta;
+}
+
+
+
     public async Task<ResponseModel<GerenteDashboardDto>> ObterDadosDoGerente()
     {
         var resposta = new ResponseModel<GerenteDashboardDto>();

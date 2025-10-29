@@ -48,6 +48,24 @@ public class GerenteController : ControllerBase
     }
 
     /// <summary>
+    /// Edita as informações do gerente
+    /// </summary>
+    /// <returns>IActionResult</returns>
+    /// <response code="401">Caso o token seja inválido</response>
+    /// <response code="400">Caso a edição falhar</response>
+    /// <response code="200">Caso a edição seja realizada com sucesso</response>
+    [Authorize]
+    [HttpPut("Editar")]
+    public async Task<ActionResult<ResponseModel<GerenteModel>>> EditarGerente([FromBody] GerenteEdicaoDto dto)
+    {
+        var resposta = await _gerenteInterface.EditarGerente(dto);
+
+        if (!resposta.Status)
+            return BadRequest(resposta);
+        return Ok(resposta);
+    }
+
+    /// <summary>
     /// Acessa os dados do gerente e a quantidade de clientes ativos.
     /// </summary>
     /// <returns>IActionResult</returns>
