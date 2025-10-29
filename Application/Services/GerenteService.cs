@@ -123,9 +123,9 @@ public async Task<ResponseModel<GerenteModel>> EditarGerente(GerenteEdicaoDto dt
 
 
 
-    public async Task<ResponseModel<GerenteDashboardDto>> ObterDadosDoGerente()
+    public async Task<ResponseModel<GerenteDadosDto>> ObterDadosDoGerente()
     {
-        var resposta = new ResponseModel<GerenteDashboardDto>();
+        var resposta = new ResponseModel<GerenteDadosDto>();
         try
         {
             var gerenteId = GetGerenteId();
@@ -141,7 +141,7 @@ public async Task<ResponseModel<GerenteModel>> EditarGerente(GerenteEdicaoDto dt
             var clientesEmNegociacao = await _gerenteRepository.CountClientesByStatusAsync(gerenteId, "Em Negociação");
             var clientesInativos = await _gerenteRepository.CountClientesByStatusAsync(gerenteId, "Inativo");
 
-            var dadosDoGerente = new GerenteDashboardDto
+            var dadosDoGerente = new GerenteDadosDto
             {
                 Nome = gerente.Nome,
                 Email = gerente.Email,

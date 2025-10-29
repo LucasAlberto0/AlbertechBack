@@ -1,4 +1,4 @@
-public class GerenteDashboardDto
+public class GerenteDadosDto
 {
     public string Nome { get; set; }
 

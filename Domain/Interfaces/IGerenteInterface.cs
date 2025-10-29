@@ -6,5 +6,5 @@ public interface IGerenteInterface
 
     Task<ResponseModel<GerenteModel>> EditarGerente(GerenteEdicaoDto dto);
     
-    Task<ResponseModel<GerenteDashboardDto>> ObterDadosDoGerente();
+    Task<ResponseModel<GerenteDadosDto>> ObterDadosDoGerente();
 }

@@ -11,7 +11,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AlbertechBack.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251028175322_ConexaoBd")]
+    [Migration("20251029130400_ConexaoBd")]
     partial class ConexaoBd
     {
         /// <inheritdoc />
