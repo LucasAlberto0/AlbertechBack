@@ -19,7 +19,8 @@ builder.Services.AddScoped<TokenService>();
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseNpgsql(builder.Configuration["DefaultConnection"]);
+
 });
 
 
@@ -90,7 +91,7 @@ builder.Services.AddAuthentication(options =>
 })
 .AddJwtBearer(options =>
 {
-    var key = Encoding.UTF8.GetBytes("5424h32ljh23lk4j234234324");
+    var key = Encoding.UTF8.GetBytes(builder.Configuration["SymmetricSecurityKey"]);
 
     options.TokenValidationParameters = new TokenValidationParameters
     {

@@ -22,7 +22,7 @@ public class TokenService
             new Claim("loginTimestamp", DateTime.UtcNow.ToString("o"))
         };
 
-        var chave = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("5424h32ljh23lk4j234234324")); 
+        var chave = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["SymmetricSecurityKey"])); 
         var signingCredentials = new SigningCredentials(chave, SecurityAlgorithms.HmacSha256);
 
         var token = new JwtSecurityToken(
