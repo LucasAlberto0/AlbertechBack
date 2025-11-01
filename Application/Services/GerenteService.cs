@@ -140,6 +140,7 @@ public async Task<ResponseModel<GerenteModel>> EditarGerente(GerenteEdicaoDto dt
             var clientesAtivos = await _gerenteRepository.CountClientesByStatusAsync(gerenteId, "Ativo");
             var clientesEmNegociacao = await _gerenteRepository.CountClientesByStatusAsync(gerenteId, "Em Negociação");
             var clientesInativos = await _gerenteRepository.CountClientesByStatusAsync(gerenteId, "Inativo");
+            var clientesPorCidade = await _gerenteRepository.CountClientesByCidadeAsync(gerenteId);
 
             var dadosDoGerente = new GerenteDadosDto
             {
@@ -149,7 +150,8 @@ public async Task<ResponseModel<GerenteModel>> EditarGerente(GerenteEdicaoDto dt
                 TotalClientes = totalClientes,
                 ClientesAtivos = clientesAtivos,
                 ClientesEmNegociacao = clientesEmNegociacao,
-                ClientesInativos = clientesInativos
+                ClientesInativos = clientesInativos,
+                ClientesPorCidade = clientesPorCidade
             };
 
             resposta.Dados = dadosDoGerente;

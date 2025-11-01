@@ -30,6 +30,18 @@ public class GerenteRepository : IGerenteRepository
             .CountAsync(c => c.GerenteId == gerenteId && c.Status.ToLower() == status.ToLower());
     }
 
+    public async Task<List<ContagemCidadeDto>> CountClientesByCidadeAsync(string gerenteId)
+    {
+        return await _context.Clientes
+            .Where(c => c.GerenteId == gerenteId)
+            .GroupBy(c => c.Cidade)
+            .Select(g => new ContagemCidadeDto
+            {
+                Cidade = g.Key,
+                Quantidade = g.Count()
+            })
+            .ToListAsync();
+    }
 
     public async Task AddAsync(GerenteModel gerente)
     {

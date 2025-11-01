@@ -13,4 +13,6 @@ public interface IGerenteRepository
     Task AddAsync(GerenteModel gerente);
 
     Task UpdateAsync(GerenteModel gerente);
+
+    Task<List<ContagemCidadeDto>> CountClientesByCidadeAsync(string gerenteId);
 }

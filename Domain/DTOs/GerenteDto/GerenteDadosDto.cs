@@ -13,4 +13,6 @@ public class GerenteDadosDto
     public int ClientesEmNegociacao { get; set; }
 
     public int ClientesInativos { get; set; }
+
+    public List<ContagemCidadeDto> ClientesPorCidade { get; set; }
 }
